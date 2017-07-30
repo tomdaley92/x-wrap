@@ -1,0 +1,13 @@
+#include "resource.h"
+
+XWRAP_ICON    ICON    "resources/Xwrap.ico"
+
+SYSTEMTRAY_MENU MENU 
+BEGIN 
+    POPUP "System Tray Icon Menu" 
+    BEGIN 
+        MENUITEM "Run Xwrap when my computer starts", TRAYICON_BOOT_FLAG
+        MENUITEM SEPARATOR
+        MENUITEM "Quit Xwrap", TRAYICON_QUIT  
+    END
+END
