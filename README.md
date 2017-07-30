@@ -6,7 +6,9 @@ keyboard+mouse mapping utility for
 Windows. 
 
 **There is still a ton of
-work to do! NOT FUNCTIONAL YET!**
+work to do!**
+
+**BUILD NOT FUNCTIONAL YET**
 
 ## Building on Windows
 Microsoft's Visual C++ Build Tools 
