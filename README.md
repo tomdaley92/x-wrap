@@ -1,8 +1,12 @@
 # Xwrap
-**v1.0.0**
+**v0.0.1**
 
-A simple and lightweight gamepad to keyboard+mouse mapping utility
+A simple and lightweight gamepad to 
+keyboard+mouse mapping utility for 
+Windows. 
 
+**There is still a ton of
+work to do! A work in progress!**
 
 ## Building on Windows
 Microsoft's Visual C++ Build Tools 
