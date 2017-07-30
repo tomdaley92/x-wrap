@@ -5,7 +5,7 @@ A simple and lightweight gamepad to
 keyboard+mouse mapping utility for 
 Windows. A work in progress.
 
-**MAPPING IS NOT YET FUNCTIONAL!**
+**GAMEPAD MAPPING IS NOT YET FUNCTIONAL!**
 
 ## Building on Windows
 Microsoft's Visual C++ Build Tools 
