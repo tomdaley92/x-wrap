@@ -8,7 +8,7 @@
 
 void add_tray_icon(HWND hWnd, HICON hIcon, char *hover_tip);
 void remove_tray_icon(HWND hWnd);
-void show_tray_icon_menu(HWND hWnd, HMENU hmenuTrackPopup);
+void show_tray_menu(HWND hWnd, HMENU hmenuTrackPopup);
 void set_tray_menu_flag(HMENU hmenu, bool enable, short int menuID);
 
 #endif

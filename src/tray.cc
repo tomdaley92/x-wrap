@@ -36,7 +36,7 @@ void remove_tray_icon(HWND hwnd) {
     }
 }
 
-void show_tray_icon_menu(HWND hwnd, HMENU hmenuTrackPopup) { 
+void show_tray_menu(HWND hwnd, HMENU hmenuTrackPopup) { 
     /* find out where the user clicked */
     POINT pt;
     GetCursorPos(&pt);

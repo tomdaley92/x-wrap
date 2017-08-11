@@ -81,7 +81,7 @@ int main(int argc, char**argv) {
                 }
 
                 if (event.syswm.msg->msg.win.msg == WM_COMMAND) {
-                    /* close when the user right-clicks tray icon quit button */
+                    /* close when the user clicks the tray menu quit button */
                     if (LOWORD(event.syswm.msg->msg.win.wParam == TRAYICON_QUIT)) 
                         done = 1; 
                     /* toggle boot on startup (right-click tray icon menu) */

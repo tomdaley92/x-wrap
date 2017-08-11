@@ -137,7 +137,7 @@ void Display::Show() {
 }
 
 void Display::ShowTrayIconMenu() {
-    show_tray_icon_menu(hwnd, hmenuTrackPopup);
+    show_tray_menu(hwnd, hmenuTrackPopup);
 }
 
 void Display::SetTrayIconBootFlag(bool enable) {
