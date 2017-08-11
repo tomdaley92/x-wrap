@@ -64,9 +64,9 @@ int main(int argc, char**argv) {
             display.ProcessEvents(&event);
 
             if (event.type == SDL_WINDOWEVENT) {
-                if (event.window.event == SDL_WINDOWEVENT_MINIMIZED) 
-                    display.Hide();
-                if (event.window.event == SDL_WINDOWEVENT_CLOSE) 
+                if (event.window.event == SDL_WINDOWEVENT_MINIMIZED || 
+                    event.window.event == SDL_WINDOWEVENT_CLOSE) 
+                    /* background the process */
                     display.Hide();
             }
 
