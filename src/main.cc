@@ -42,7 +42,7 @@ int main(int argc, char**argv) {
         return 1;
 
     /* set the boot flag / update registry value */
-    display.SetTrayIconBootFlag(config.boot_on_startup);
+    display.SetTrayMenuBootFlag(config.boot_on_startup);
     config.boot_on_startup = registry_launch_on_startup(config.boot_on_startup);
 
     /* timing control variables */
@@ -77,7 +77,7 @@ int main(int argc, char**argv) {
                         display.Show();
                     /* right click tray icon -> show menu */
                     if (LOWORD(event.syswm.msg->msg.win.lParam == WM_RBUTTONDOWN)) 
-                        display.ShowTrayIconMenu();
+                        display.ShowTrayMenu();
                 }
 
                 if (event.syswm.msg->msg.win.msg == WM_COMMAND) {
@@ -87,7 +87,7 @@ int main(int argc, char**argv) {
                     /* toggle boot on startup (right-click tray icon menu) */
                     if (LOWORD(event.syswm.msg->msg.win.wParam == TRAYICON_BOOT_FLAG)) {
                         config.boot_on_startup = registry_launch_on_startup(!config.boot_on_startup);
-                        display.SetTrayIconBootFlag(config.boot_on_startup);
+                        display.SetTrayMenuBootFlag(config.boot_on_startup);
                         save_config(&config);
                     }
                 }

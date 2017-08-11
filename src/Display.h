@@ -58,8 +58,8 @@ class Display {
         void Resize(int x, int y);
         void Hide();
         void Show();
-        void ShowTrayIconMenu();
-        void SetTrayIconBootFlag(bool enable);
+        void ShowTrayMenu();
+        void SetTrayMenuBootFlag(bool enable);
         void ProcessEvents(SDL_Event *event);
         void RenderFrame();
 };

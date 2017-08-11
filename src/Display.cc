@@ -136,11 +136,11 @@ void Display::Show() {
     SDL_RaiseWindow(window);
 }
 
-void Display::ShowTrayIconMenu() {
+void Display::ShowTrayMenu() {
     show_tray_menu(hwnd, hmenuTrackPopup);
 }
 
-void Display::SetTrayIconBootFlag(bool enable) {
+void Display::SetTrayMenuBootFlag(bool enable) {
     set_tray_menu_flag(hmenu, enable, TRAYICON_BOOT_FLAG);
 }
 

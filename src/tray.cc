@@ -52,7 +52,7 @@ void show_tray_menu(HWND hwnd, HMENU hmenuTrackPopup) {
         pt.x, pt.y, 0, hwnd, NULL);
 }
 
-void set_tray_menu_flag(HMENU hmenu, bool enable, short int menuID) {
+void set_tray_menu_flag(HMENU hmenu, bool enable, short menuID) {
     /* check/uncheck the box */
     if (enable) CheckMenuItem(hmenu, menuID, MF_BYCOMMAND | MF_CHECKED);
     else CheckMenuItem(hmenu, menuID, MF_BYCOMMAND | MF_UNCHECKED);
