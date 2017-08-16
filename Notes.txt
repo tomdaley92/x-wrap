@@ -1,0 +1,57 @@
+Thomas Daley
+Xwrap - Gamepad to Keyboard/Mouse mapper
+July 6, 2017
+
+PARSER NOTES
+--------------------------------
+
+  Boolean Button Parser Rules:
+
+   - logical operators supported: | (OR), & (AND), ! (NOT)
+   - You may optionally use parenthesis '(' and ')' to logically separate your operands
+   - An equals sign '=' separates the gamepad controls (left) from the keyboard bindings (right)
+   - A syntax check will be used to verify correctness
+
+   OPERATORS:
+
+    Binary: Takes 2 operands
+
+      | (OR)
+          example: (A | B) = ESC
+          Means button A or B must be presesd to active the binding. 
+          They do not have to be pressed at the same time!
+
+      & (AND)
+          example: (START & BACK) = ALT + F4
+          Means button START and BACK must be pressed at the same time to 
+          force quit the game!
+
+    Unary: Takes 1 operand
+
+      ! (NOT)
+          example (A | B) & (X)
+
+  KEYS: (SendInput)
+   - Vitrual Key codes (1-254)
+   - KEYDOWN (default) KEYUP (special flag)
+
+  MOUSE: (SendInput)
+   - mouse movement (x,y) absolute or relative
+   - mouse buttons: LEFT, MIDDLE, RIGHT => UP or DOWN
+     - the bit flags that specify mouse button status are set 
+       to indicate changes in status, not ongoing conditions
+
+  MODULIZATION IDEAS:
+
+    - MACRO Class
+    - CONDITION class
+      - this should do a little bit of optimization: condense buttons with logical OR's into a single bit mask
+
+  PARENTHESIS PARSING:
+    - parse them using a stack like data structure?
+      - push whenever we see a '('
+      - pop whenever we see a ')'
+
+
+
+
