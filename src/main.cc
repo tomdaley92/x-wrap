@@ -10,6 +10,7 @@ Thomas Daley
 #include "Display.h"
 #include "config.h"
 #include "registry.h"
+#include "parser.h" /* for parser tests */
 #include <stdio.h>
 
 int main(int argc, char**argv) {
@@ -51,6 +52,41 @@ int main(int argc, char**argv) {
     unsigned int elapsed;
     unsigned int remaining;
     unsigned int interval = 1000 / display.mode.refresh_rate;
+
+    ///////////////////////////////////////////////////////
+    /* parser tests */
+    fprintf(stderr, "-----Parser tests-----\n");
+    
+
+    char test[MAX_PATH];
+
+    /* simple real-world example */
+    const char *test_1 = "(START & BACK) = ALT + F4";
+    memcpy(test, test_1, strlen(test_1) + 1);
+    parse(test);
+
+    /* the empty string */
+    const char *test_2 = "";
+    memcpy(test, test_2, strlen(test_2) + 1);
+    parse(test);
+
+    /* stack integrity test */
+    const char *test_3 = "(((X | Y))) = MOUSE_LEFT";
+    memcpy(test, test_3, strlen(test_3) + 1);
+    parse(test);
+
+    /* syntax error test 'B' doesn't exist */
+    const char *test_4 = "(A | C) & B = ESCAPE";
+    memcpy(test, test_4, strlen(test_4) + 1);
+    parse(test);
+
+    /* no right-hand side test */
+
+    /* ??? test */
+
+    fprintf(stderr, "------End tests-------\n");
+    /* end parser tests */
+    ///////////////////////////////////////////////////////
 
     /* main program loop */
     bool done = 0;
