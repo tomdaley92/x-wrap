@@ -13,7 +13,7 @@ Thomas Daley
 #include "parser.h" /* for parser tests */
 #include <stdio.h>
 
-int main(int argc, char**argv) {
+int main(int argc, char **argv) {
     
     /* we only want one instance running at any given time */
     HANDLE running;

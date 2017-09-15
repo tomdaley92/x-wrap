@@ -5,12 +5,12 @@
 //#include <xinput.h> /* Lets try to implement our own, XInputGetKeyStroke() */
 
 /* [0.0, 1.0] */
-#define TRIGGER_TO_FLOAT(x) (x / (float) 0xFF) 
-#define JOYSTICK_TO_FLOAT(x) (((x / (float) 0x7FFF) / (float)2.0) + (float)0.5) 
+#define TRIGGER_SIGMOID(x) (x / (float) 0xFF) 
+#define JOYSTICK_SIGMOID(x) (((x / (float) 0x7FFF) / (float)2.0) + (float)0.5)
 
 /* [0.0, 100.0] */
-#define TRIGGER_PERCENT(x) (TRIGGER_TO_FLOAT(x) * 100.0)
-#define JOYSTICK_PERCENT(x) (JOYSTICK_TO_FLOAT(x) * 100.0)
+#define TRIGGER_PERCENT(x) (TRIGGER_SIGMOID(x) * 100.0)
+#define JOYSTICK_PERCENT(x) (JOYSTICK_SIGMOID(x) * 100.0)
 
 /* the (default) amount the joysticks are required to exceed 
    from the center in one direction in order to register */

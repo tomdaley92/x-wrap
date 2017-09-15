@@ -156,41 +156,41 @@ void Gui::ControllerWindows() {
                 char data[32];
 
                 sprintf_s(data, 32, "%d (%.0f%%)", gamepad->LeftTrigger(i), TRIGGER_PERCENT(gamepad->LeftTrigger(i)));
-                ImGui::ProgressBar( TRIGGER_TO_FLOAT(gamepad->LeftTrigger(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->LeftTrigger(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT TRIGGER");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 sprintf_s(data, 32, "%d (%.0f%%)", gamepad->RightTrigger(i), TRIGGER_PERCENT(gamepad->RightTrigger(i)));
-                ImGui::ProgressBar( TRIGGER_TO_FLOAT(gamepad->RightTrigger(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->RightTrigger(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT TRIGGER");
                 memset(data, '\0', sizeof(char) * 32);
 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbLX(i), JOYSTICK_PERCENT(gamepad->ThumbLX(i)));
                 sprintf_s(data, 32, "%d", gamepad->ThumbLX(i));
-                ImGui::ProgressBar( JOYSTICK_TO_FLOAT(gamepad->ThumbLX(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbLX(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT STICK (X)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbLY(i), JOYSTICK_PERCENT(gamepad->ThumbLY(i))); 
                 sprintf_s(data, 32, "%d", gamepad->ThumbLY(i));              
-                ImGui::ProgressBar( JOYSTICK_TO_FLOAT(gamepad->ThumbLY(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbLY(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT STICK (Y)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbRX(i), JOYSTICK_PERCENT(gamepad->ThumbRX(i)));
                 sprintf_s(data, 32, "%d", gamepad->ThumbRX(i));
-                ImGui::ProgressBar( JOYSTICK_TO_FLOAT(gamepad->ThumbRX(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbRX(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT STICK (X)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbRY(i), JOYSTICK_PERCENT(gamepad->ThumbRY(i)));
                 sprintf_s(data, 32, "%d", gamepad->ThumbRY(i));
-                ImGui::ProgressBar( JOYSTICK_TO_FLOAT(gamepad->ThumbRY(i)), ImVec2(0.0f,0.0f), data);
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbRY(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT STICK (Y)");
                 memset(data, '\0', sizeof(char) * 32);
