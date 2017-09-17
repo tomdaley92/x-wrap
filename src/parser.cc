@@ -7,7 +7,7 @@
 char *identify(char *pos, int *button) {
 
     /* identify the pos string and return xinput bit-mask */
-    if      (strncmp(pos, "DPAD_UP", 7) == 0)          { pos+=7; *button = XINPUT_GAMEPAD_DPAD_UP;  }
+    if      (strncmp(pos, "DPAD_UP", 7) == 0)          { pos+=7; *button = XINPUT_GAMEPAD_DPAD_UP; }
     else if (strncmp(pos, "DPAD_DOWN", 9) == 0)        { pos+=9; *button = XINPUT_GAMEPAD_DPAD_DOWN; }
     else if (strncmp(pos, "DPAD_LEFT", 9) == 0)        { pos+=9; *button = XINPUT_GAMEPAD_DPAD_LEFT; }
     else if (strncmp(pos, "DPAD_RIGHT", 10) == 0)      { pos+=10; *button = XINPUT_GAMEPAD_DPAD_RIGHT; }

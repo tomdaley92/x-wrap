@@ -124,6 +124,7 @@ void Gui::LeftPane() {
             /* testing gamepad multiple button pressing */
             short button_macro = (XINPUT_GAMEPAD_START | XINPUT_GAMEPAD_BACK);
             if ((gamepad->Buttons(0) & button_macro) == button_macro) {
+            //if (gamepad->Buttons(0) & button_macro) {
                 ImGui::TextWrapped("[START + BACK]");
             }
   

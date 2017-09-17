@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     memcpy(test, test_3, strlen(test_3) + 1);
     parse(test);
 
-    /* syntax error test 'B' doesn't exist */
+    /* syntax error test 'C' doesn't exist */
     const char *test_4 = "(A | C) & B = ESCAPE";
     memcpy(test, test_4, strlen(test_4) + 1);
     parse(test);

@@ -29,7 +29,9 @@ PARSER NOTES
     Unary: Takes 1 operand
 
       ! (NOT)
-          example (A | B) & (X)
+          example:                (A | B) & !(X | Y)
+          another valid example:  (A | B) & (!(X | Y))
+          another valid example:  A & !B
 
   KEYS: (SendInput)
    - Vitrual Key codes (1-254)
