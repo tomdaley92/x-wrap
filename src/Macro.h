@@ -27,4 +27,14 @@ typedef struct CONDITION {
     OPERAND operand;
 } CONDITION;
 
+class Macro { // TODO
+    
+    private:
+        
+    public:
+
+        Macro();
+        ~Macro();
+};
+
 #endif
