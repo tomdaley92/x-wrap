@@ -3,6 +3,7 @@
 #include "Gamepad.h"
 #include "config.h"
 #include <stdio.h> /* fprintf */
+#include <SDL2/SDL_opengl.h>
 
 Display::Display(){
     gui = Gui();
@@ -33,7 +34,7 @@ Display::~Display(){
 }
     
 
-int Display::Initialize(Gamepad *gamepad, XWRAP_CONFIG *config) {
+int Display::initialize(Gamepad *gamepad, XWRAP_CONFIG *config) {
 
     /* set up SDL - we don't need audio */
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_EVENTS) != 0) {
@@ -52,12 +53,15 @@ int Display::Initialize(Gamepad *gamepad, XWRAP_CONFIG *config) {
     if (config->start_in_tray) window_flags |= SDL_WINDOW_HIDDEN; 
         
     /* create window */    
-    window = SDL_CreateWindow(WINDOW_TITLE, 
-                              SDL_WINDOWPOS_CENTERED, 
-                              SDL_WINDOWPOS_CENTERED, 
-                              WINDOW_WIDTH, 
-                              WINDOW_HEIGHT, 
-                              window_flags);
+    window = SDL_CreateWindow(
+        WINDOW_TITLE,
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        window_flags
+    );
+
     if (!window) {
         fprintf(stderr, "Error: %s\n", SDL_GetError());
         return 1;
@@ -113,49 +117,56 @@ int Display::Initialize(Gamepad *gamepad, XWRAP_CONFIG *config) {
     SDL_GL_SetSwapInterval(0);
 
     /* setup ImGui binding */
-    gui.Initialize(this, gamepad, config);
+    gui.initialize(this, gamepad, config);
 
     return 0;
 }
 
-void Display::Resize(int x, int y) {
+void Display::resize(int x, int y) {
     /* get the current window size */
     WINDOW_WIDTH = x;
     WINDOW_HEIGHT = y;
 }
 
-void Display::Hide() {
+void Display::hide() {
     /* this also "backgrounds" the process */
     SDL_MinimizeWindow(window);
     SDL_HideWindow(window);
 }
 
-void Display::Show() {
+void Display::show() {
     SDL_ShowWindow(window);
     SDL_RestoreWindow(window);
     SDL_RaiseWindow(window);
 }
 
-void Display::ShowTrayMenu() {
+void Display::showTrayMenu() {
     show_tray_menu(hwnd, hmenuTrackPopup);
 }
 
-void Display::SetTrayMenuBootFlag(bool enable) {
+void Display::setTrayMenuBootFlag(bool enable) {
     set_tray_menu_flag(hmenu, enable, TRAYICON_BOOT_FLAG);
 }
 
-void Display::ProcessEvents(SDL_Event *event) {
-    gui.ProcessEvents(event);
+void Display::processEvents(SDL_Event *event) {
+    gui.processEvents(event);
 }
 
-void Display::RenderFrame(){
-    gui.NewFrame();
+void Display::renderFrame(){
+    gui.newFrame();
 
     /* set Viewport & Clear the screen (sets the background color) */
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-    glClearColor(background_color[0], background_color[1], background_color[2], 1.0);
+    
+    glClearColor(
+        background_color[0], 
+        background_color[1], 
+        background_color[2], 
+        1.0
+    );
+    
     glClear(GL_COLOR_BUFFER_BIT);
 
-    gui.Render();
+    gui.render();
     SDL_GL_SwapWindow(window);
 }

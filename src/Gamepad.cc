@@ -23,7 +23,7 @@ Gamepad::~Gamepad() {
     FreeLibrary(xinput_dll);
 }
 
-void Gamepad::Update() {
+void Gamepad::update() {
     /* update all controller states */
     for (int i = 0; i < MAX_PLAYERS; i++) {
         connected_list[i] = XInputGetState(i, &state[i]) ?
@@ -31,49 +31,49 @@ void Gamepad::Update() {
     }   
 }
 
-bool Gamepad::Connected(int player) {
+bool Gamepad::connected(int player) {
     return VALID_PLAYER(player) ?
     connected_list[player] :
     false;
 }
 
-unsigned long Gamepad::EventCount(int player) {
+unsigned long Gamepad::eventCount(int player) {
     return VALID_PLAYER(player) ?
     state[player].eventCount : 0;
 }
 
-unsigned short Gamepad::Buttons(int player) {
+unsigned short Gamepad::buttons(int player) {
     return VALID_PLAYER(player) ?
     state[player].buttons : 0;
 
 }
 
-unsigned char Gamepad::LeftTrigger(int player) {
+unsigned char Gamepad::leftTrigger(int player) {
     return VALID_PLAYER(player) ?
     state[player].leftTrigger : 0;
 }
 
-unsigned char Gamepad::RightTrigger(int player) {
+unsigned char Gamepad::rightTrigger(int player) {
     return VALID_PLAYER(player) ?
     state[player].rightTrigger : 0;
 }
 
-short int Gamepad::ThumbLX(int player) {
+short int Gamepad::thumbLX(int player) {
     return VALID_PLAYER(player) ?
     state[player].thumbLX : 0;
 }
 
-short int Gamepad::ThumbLY(int player) {
+short int Gamepad::thumbLY(int player) {
     return VALID_PLAYER(player) ?
     state[player].thumbLY : 0;
 }
 
-short int Gamepad::ThumbRX(int player) {
+short int Gamepad::thumbRX(int player) {
     return VALID_PLAYER(player) ?
     state[player].thumbRX : 0;
 }
 
-short int Gamepad::ThumbRY(int player) {
+short int Gamepad::thumbRY(int player) {
     return VALID_PLAYER(player) ?
     state[player].thumbRY : 0;
 }

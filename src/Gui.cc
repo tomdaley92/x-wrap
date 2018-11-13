@@ -20,7 +20,7 @@ Gui::~Gui() {
     ImGui_ImplSdl_Shutdown();
 }
 
-void Gui::Initialize(Display *display, Gamepad *gamepad, XWRAP_CONFIG *config) {
+void Gui::initialize(Display *display, Gamepad *gamepad, XWRAP_CONFIG *config) {
     this->display = display;
     this->gamepad = gamepad;
     this->config = config;
@@ -45,18 +45,18 @@ void Gui::Initialize(Display *display, Gamepad *gamepad, XWRAP_CONFIG *config) {
     //left_pane_flags |= ImGuiWindowFlags_NoCollapse; 
 }
 
-void Gui::ProcessEvents(SDL_Event *event) {
+void Gui::processEvents(SDL_Event *event) {
     ImGui_ImplSdl_ProcessEvent(event);
 }
 
-void Gui::NewFrame() {
+void Gui::newFrame() {
     ImGui_ImplSdl_NewFrame(display->window);
-    LeftPane();
-    ControllerWindows();
+    leftPane();
+    controllerWindows();
 }
 
 
-void Gui::LeftPane() {
+void Gui::leftPane() {
     if (show_left_pane) {
         bool before;
         ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
@@ -123,7 +123,7 @@ void Gui::LeftPane() {
             
             /* testing gamepad multiple button pressing */
             short button_macro = (XINPUT_GAMEPAD_START | XINPUT_GAMEPAD_BACK);
-            if ((gamepad->Buttons(0) & button_macro) == button_macro) {
+            if ((gamepad->buttons(0) & button_macro) == button_macro) {
             //if (gamepad->Buttons(0) & button_macro) {
                 ImGui::TextWrapped("[START + BACK]");
             }
@@ -139,7 +139,7 @@ void Gui::LeftPane() {
     }
 }
 
-void Gui::ControllerWindows() {
+void Gui::controllerWindows() {
     for (int i = 0; i < NUM_WINDOWS; i++) {
         if(show_controller_window[i]) {
             /* set window size and title */
@@ -151,73 +151,73 @@ void Gui::ControllerWindows() {
             ImGui::Text(title);
             
             /* fill the window with visual data */
-            if (!gamepad->Connected(i)) {
+            if (!gamepad->connected(i)) {
                 ImGui::Text("Disconnected!");
             } else {
                 char data[32];
 
-                sprintf_s(data, 32, "%d (%.0f%%)", gamepad->LeftTrigger(i), TRIGGER_PERCENT(gamepad->LeftTrigger(i)));
-                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->LeftTrigger(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d (%.0f%%)", gamepad->leftTrigger(i), TRIGGER_PERCENT(gamepad->leftTrigger(i)));
+                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->leftTrigger(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT TRIGGER");
                 memset(data, '\0', sizeof(char) * 32);
                 
-                sprintf_s(data, 32, "%d (%.0f%%)", gamepad->RightTrigger(i), TRIGGER_PERCENT(gamepad->RightTrigger(i)));
-                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->RightTrigger(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d (%.0f%%)", gamepad->rightTrigger(i), TRIGGER_PERCENT(gamepad->rightTrigger(i)));
+                ImGui::ProgressBar( TRIGGER_SIGMOID(gamepad->rightTrigger(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT TRIGGER");
                 memset(data, '\0', sizeof(char) * 32);
 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbLX(i), JOYSTICK_PERCENT(gamepad->ThumbLX(i)));
-                sprintf_s(data, 32, "%d", gamepad->ThumbLX(i));
-                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbLX(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d", gamepad->thumbLX(i));
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->thumbLX(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT STICK (X)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbLY(i), JOYSTICK_PERCENT(gamepad->ThumbLY(i))); 
-                sprintf_s(data, 32, "%d", gamepad->ThumbLY(i));              
-                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbLY(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d", gamepad->thumbLY(i));              
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->thumbLY(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("LEFT STICK (Y)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbRX(i), JOYSTICK_PERCENT(gamepad->ThumbRX(i)));
-                sprintf_s(data, 32, "%d", gamepad->ThumbRX(i));
-                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbRX(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d", gamepad->thumbRX(i));
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->thumbRX(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT STICK (X)");
                 memset(data, '\0', sizeof(char) * 32);
                 
                 //sprintf_s(data, 32, "%d (%.0f%%)", gamepad->ThumbRY(i), JOYSTICK_PERCENT(gamepad->ThumbRY(i)));
-                sprintf_s(data, 32, "%d", gamepad->ThumbRY(i));
-                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->ThumbRY(i)), ImVec2(0.0f,0.0f), data);
+                sprintf_s(data, 32, "%d", gamepad->thumbRY(i));
+                ImGui::ProgressBar( JOYSTICK_SIGMOID(gamepad->thumbRY(i)), ImVec2(0.0f,0.0f), data);
                 ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
                 ImGui::Text("RIGHT STICK (Y)");
                 memset(data, '\0', sizeof(char) * 32);
 
-                if (!gamepad->Buttons(i)) {
+                if (!gamepad->buttons(i)) {
                     ImGui::Text("Press a button on the gamepad!");
                 } else {
                     ImGui::BeginGroup();
                     ImGui::BeginGroup();
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_DPAD_UP) { ImGui::SmallButton("DPAD UP"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_DPAD_DOWN) { ImGui::SmallButton("DPAD DOWN"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_DPAD_LEFT) { ImGui::SmallButton("DPAD LEFT"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_DPAD_RIGHT) { ImGui::SmallButton("DPAD RIGHT"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_BACK) { ImGui::SmallButton("BACK"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_GUIDE) { ImGui::SmallButton("GUIDE"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_START) { ImGui::SmallButton("START"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_DPAD_UP) { ImGui::SmallButton("DPAD UP"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_DPAD_DOWN) { ImGui::SmallButton("DPAD DOWN"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_DPAD_LEFT) { ImGui::SmallButton("DPAD LEFT"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_DPAD_RIGHT) { ImGui::SmallButton("DPAD RIGHT"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_BACK) { ImGui::SmallButton("BACK"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_GUIDE) { ImGui::SmallButton("GUIDE"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_START) { ImGui::SmallButton("START"); ImGui::SameLine(); }
                     ImGui::EndGroup();
                     ImGui::BeginGroup();
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_LEFT_THUMB) { ImGui::SmallButton("LEFT THUMB"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_RIGHT_THUMB) { ImGui::SmallButton("RIGHT THUMB"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_LEFT_SHOULDER) { ImGui::SmallButton("LEFT SHOULDER"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_RIGHT_SHOULDER) { ImGui::SmallButton("RIGHT SHOULDER"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_A) { ImGui::SmallButton("A"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_B) { ImGui::SmallButton("B"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_X) { ImGui::SmallButton("X"); ImGui::SameLine(); }
-                    if (gamepad->Buttons(i) & XINPUT_GAMEPAD_Y) { ImGui::SmallButton("Y"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_LEFT_THUMB) { ImGui::SmallButton("LEFT THUMB"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_RIGHT_THUMB) { ImGui::SmallButton("RIGHT THUMB"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_LEFT_SHOULDER) { ImGui::SmallButton("LEFT SHOULDER"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_RIGHT_SHOULDER) { ImGui::SmallButton("RIGHT SHOULDER"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_A) { ImGui::SmallButton("A"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_B) { ImGui::SmallButton("B"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_X) { ImGui::SmallButton("X"); ImGui::SameLine(); }
+                    if (gamepad->buttons(i) & XINPUT_GAMEPAD_Y) { ImGui::SmallButton("Y"); ImGui::SameLine(); }
                     ImGui::EndGroup();
                     ImGui::EndGroup();
                 }
@@ -227,6 +227,6 @@ void Gui::ControllerWindows() {
     }
 }
 
-void Gui::Render() {
+void Gui::render() {
     ImGui::Render();
 }

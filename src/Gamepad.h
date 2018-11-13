@@ -91,24 +91,24 @@ class Gamepad {
         ~Gamepad();
 
         /* poll controllers and update state */
-        void Update();
+        void update();
 
-        bool Connected(int player);
-        unsigned long EventCount(int player);
-        unsigned short Buttons(int player);
+        bool connected(int player);
+        unsigned long eventCount(int player);
+        unsigned short buttons(int player);
 
         /* Analog trigger values are from 0-255 
            (on a fully analog supported controllers) 
            e.g. 8bitdo controllers are only on or off (0 or 255) */
-        unsigned char LeftTrigger(int player);
-        unsigned char RightTrigger(int player);
+        unsigned char leftTrigger(int player);
+        unsigned char rightTrigger(int player);
 
         /* joystick values range from -32768 to 32767 
            with 0 being centered */
-        short int ThumbLX(int player);
-        short int ThumbLY(int player);
-        short int ThumbRX(int player);
-        short int ThumbRY(int player);  
+        short int thumbLX(int player);
+        short int thumbLY(int player);
+        short int thumbRX(int player);
+        short int thumbRY(int player);  
         
 };
 

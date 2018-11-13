@@ -12,23 +12,24 @@ Thomas Daley
 #include "registry.h"
 #include "parser.h" /* for parser tests */
 #include <stdio.h>
+#include "AbstractSyntaxTree.h"
 
 int main(int argc, char **argv) {
     
     /* we only want one instance running at any given time */
-    HANDLE running;
-    char *mutex_name = "Xwrap_singleton_instance_running";
-    running = OpenMutex(SYNCHRONIZE, TRUE, mutex_name);
-    if (running) {
+    HANDLE hXwrap;
+    char *mutex_name = WINDOW_TITLE;
+    hXwrap = OpenMutex(SYNCHRONIZE, TRUE, mutex_name);
+    if (hXwrap) {
         /* bring the window to the foreground. */
         HWND hwnd = FindWindow(NULL, WINDOW_TITLE);
         ShowWindow(hwnd, SW_RESTORE);
         SetForegroundWindow(hwnd);
         CloseHandle(hwnd);
-        CloseHandle(running);
+        CloseHandle(hXwrap);
         return 0;
     }
-    running = CreateMutex(NULL, TRUE, mutex_name);
+    hXwrap = CreateMutex(NULL, TRUE, mutex_name);
 
     /* load config file from /User/AppData/Roaming/Xwrap/config.ini */
     XWRAP_CONFIG config;
@@ -39,11 +40,11 @@ int main(int argc, char **argv) {
     
     /* init display */
     Display display = Display();
-    if (display.Initialize(&gamepad, &config))
+    if (display.initialize(&gamepad, &config))
         return 1;
 
     /* set the boot flag / update registry value */
-    display.SetTrayMenuBootFlag(config.boot_on_startup);
+    display.setTrayMenuBootFlag(config.boot_on_startup);
     config.boot_on_startup = registry_launch_on_startup(config.boot_on_startup);
 
     /* timing control variables */
@@ -52,6 +53,23 @@ int main(int argc, char **argv) {
     unsigned int elapsed;
     unsigned int remaining;
     unsigned int interval = 1000 / display.mode.refresh_rate;
+
+    /// AST Testss...
+    AbstractSyntaxTree left1 = AbstractSyntaxTree(4);
+    AbstractSyntaxTree right1 = AbstractSyntaxTree(5);
+    AbstractSyntaxTree left2 = AbstractSyntaxTree(6);
+    AbstractSyntaxTree right2 = AbstractSyntaxTree(7);
+
+    AbstractSyntaxTree left = AbstractSyntaxTree(2, &left1, &right1);
+    AbstractSyntaxTree right = AbstractSyntaxTree(3, &left2, &right2);
+
+    AbstractSyntaxTree ast = AbstractSyntaxTree(1, &left, &right);
+
+    ast.printPreOrder();
+    ast.printInOrder();
+    ast.printPostOrder();
+
+    ast.display();
 
     ///////////////////////////////////////////////////////
     /* parser tests */
@@ -97,23 +115,23 @@ int main(int argc, char **argv) {
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-            display.ProcessEvents(&event);
+            display.processEvents(&event);
 
             if (event.type == SDL_WINDOWEVENT) {
                 if (event.window.event == SDL_WINDOWEVENT_MINIMIZED || 
                     event.window.event == SDL_WINDOWEVENT_CLOSE) 
                     /* background the process */
-                    display.Hide();
+                    display.hide();
             }
 
             if (event.type == SDL_SYSWMEVENT) {
                 if (event.syswm.msg->msg.win.msg == WM_USER + 1) {
                     /* left click tray icon -> show window */
                     if (LOWORD(event.syswm.msg->msg.win.lParam == WM_LBUTTONDOWN)) 
-                        display.Show();
+                        display.show();
                     /* right click tray icon -> show menu */
                     if (LOWORD(event.syswm.msg->msg.win.lParam == WM_RBUTTONDOWN)) 
-                        display.ShowTrayMenu();
+                        display.showTrayMenu();
                 }
 
                 if (event.syswm.msg->msg.win.msg == WM_COMMAND) {
@@ -123,7 +141,7 @@ int main(int argc, char **argv) {
                     /* toggle boot on startup (right-click tray icon menu) */
                     if (LOWORD(event.syswm.msg->msg.win.wParam == TRAYICON_BOOT_FLAG)) {
                         config.boot_on_startup = registry_launch_on_startup(!config.boot_on_startup);
-                        display.SetTrayMenuBootFlag(config.boot_on_startup);
+                        display.setTrayMenuBootFlag(config.boot_on_startup);
                         save_config(&config);
                     }
                 }
@@ -136,10 +154,10 @@ int main(int argc, char **argv) {
         }
 
         /* poll the controllers */
-        gamepad.Update();
+        gamepad.update();
    
         /* rendering */
-        display.RenderFrame();
+        display.renderFrame();
 
         /* calculate how long to sleep thread 
            based on remaining frame time */
@@ -155,7 +173,7 @@ int main(int argc, char **argv) {
 
     /* the mutex object is automatically destroyed 
        when the last handle is closed */
-    CloseHandle(running);
+    CloseHandle(hXwrap);
 
     fprintf(stderr, "Xwrap terminated successfully.\n");
     return 0;

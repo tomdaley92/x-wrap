@@ -3,20 +3,19 @@
 
 #include "Gui.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_syswm.h>
 #include "resource.h" /* window icon, trayicon menu */
 #include "tray.h" /* TRAYICON_ID, and tray functions */
 
-#define WINDOW_TITLE "Xwrap"
+#define WINDOW_TITLE "Xwrap v0.0.1"
 
 #define WIDTH 800
 #define HEIGHT 800
 
 /* default render colors */
-#define DEFAULT_BACKGROUND_R 114 //25 //125
-#define DEFAULT_BACKGROUND_G 144 //20 //135
-#define DEFAULT_BACKGROUND_B 154 //40 //135
+#define DEFAULT_BACKGROUND_R 114
+#define DEFAULT_BACKGROUND_G 144
+#define DEFAULT_BACKGROUND_B 154
 
 /* forward declaration */
 class Gamepad;
@@ -53,15 +52,15 @@ class Display {
         Display();
         ~Display();
 
-        int Initialize(Gamepad *gamepad, XWRAP_CONFIG *config);
+        int initialize(Gamepad *gamepad, XWRAP_CONFIG *config);
 
-        void Resize(int x, int y);
-        void Hide();
-        void Show();
-        void ShowTrayMenu();
-        void SetTrayMenuBootFlag(bool enable);
-        void ProcessEvents(SDL_Event *event);
-        void RenderFrame();
+        void resize(int x, int y);
+        void hide();
+        void show();
+        void showTrayMenu();
+        void setTrayMenuBootFlag(bool enable);
+        void processEvents(SDL_Event *event);
+        void renderFrame();
 };
 
 #endif

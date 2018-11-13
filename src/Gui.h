@@ -32,21 +32,21 @@ class Gui {
         /* flags for controller windows */
         bool show_controller_window[NUM_WINDOWS];
 
-        void LeftPane();
-        void ControllerWindows();
+        void leftPane();
+        void controllerWindows();
 
     public:
 
         Gui();
         ~Gui();
 
-        void Initialize(Display *display, 
+        void initialize(Display *display, 
                         Gamepad *gamepad, 
                         XWRAP_CONFIG *config);
 
-        void ProcessEvents(SDL_Event *event);
-        void NewFrame();
-        void Render();
+        void processEvents(SDL_Event *event);
+        void newFrame();
+        void render();
 
         
 };
