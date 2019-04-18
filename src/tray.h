@@ -1,7 +1,10 @@
 #ifndef TRAY_H
 #define TRAY_H
 
-#include <windows.h>
+/* forward declarations */
+typedef struct HWND__* HWND;
+typedef struct HICON__* HICON;
+typedef struct HMENU__* HMENU;
 
 #define TRAYICON_ID 13
 #define TRAYICON_CALLBACKID WM_USER + 1

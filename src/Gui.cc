@@ -4,6 +4,9 @@
 #include "focus.h" /* get_current_focus */
 #include "config.h"
 #include <stdio.h> /* sprintf */
+#include <imgui.h>
+#include "imgui_impl_sdl.h" /* must be imported after imgui.h */
+
 
 Gui::Gui() {
     controller_window_flags = 0;

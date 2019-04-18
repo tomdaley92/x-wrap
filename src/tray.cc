@@ -1,4 +1,5 @@
 #include "tray.h"
+#include <windows.h>
 #include <Shellapi.h> /* Shell_NotifyIcon, nid */
 #include <stdio.h> /* fprintf */
 

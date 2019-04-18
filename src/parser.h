@@ -1,6 +1,5 @@
 #ifndef PARSER_H
-#define PARSER_H
-#include "Gamepad.h"       
+#define PARSER_H       
 
 int parse(char *line);
 

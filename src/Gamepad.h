@@ -1,8 +1,11 @@
 #ifndef GAMEPAD_H
 #define GAMEPAD_H
 
-#include <windows.h>
 //#include <xinput.h> /* Lets try to implement our own, XInputGetKeyStroke() */
+
+/* forward declaration */
+typedef struct HINSTANCE__* HINSTANCE;
+
 
 /* [0.0, 1.0] */
 #define TRIGGER_SIGMOID(x) (x / (float) 0xFF) 

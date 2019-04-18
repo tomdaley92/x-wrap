@@ -1,4 +1,5 @@
 #include "Gamepad.h"
+#include <windows.h>
 
 Gamepad::Gamepad() {
     /* create the path to xinput1_4.dll standard install location */

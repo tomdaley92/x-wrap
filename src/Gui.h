@@ -1,9 +1,6 @@
 #ifndef GUI_H
 #define GUI_H
 
-#include <imgui.h>
-#include "imgui_impl_sdl.h"
-
 #define MENU_HEIGHT 19
 #define NUM_WINDOWS 4
 
@@ -11,6 +8,8 @@
 class Display;
 class Gamepad;
 struct XWRAP_CONFIG;
+typedef union SDL_Event SDL_Event;
+typedef int ImGuiWindowFlags;
 
 class Gui {
 

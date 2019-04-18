@@ -14,7 +14,7 @@ condition with possible nested conditions
 
 */
 
-/* forward declaration */
+/* forward declarations */
 typedef struct CONDITION CONDITION;
 
 typedef struct OPERAND {
