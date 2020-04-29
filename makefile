@@ -11,23 +11,19 @@
 APPNAME = Xwrap
 ARCH = x86
 
-CONSOLE_APP = /SUBSYSTEM:CONSOLE
-GUI_APP = /SUBSYSTEM:WINDOWS
-
 CC = CL
 CFLAGS = /MD /nologo /W3
 LFLAGS = /link \
-		 /LIBPATH:$(MAKEDIR)/lib/sdl/lib/$(ARCH) \
-		 /ENTRY:mainCRTStartup
-
-INCS = /I$(MAKEDIR)/lib/sdl/include/ \
-	   /I$(MAKEDIR)/lib/imgui/
+	/LIBPATH:$(MAKEDIR)/lib/sdl/lib/$(ARCH) \
+	/ENTRY:mainCRTStartup
+INCS = /I $(MAKEDIR)/lib/sdl/include/ \
+	/I $(MAKEDIR)/lib/imgui/
 LIBS = SDL2.lib \
-	   SDL2main.lib \
-	   opengl32.lib \
-       Shell32.lib \
-       Advapi32.lib \
-       Ole32.lib
+	SDL2main.lib \
+	opengl32.lib \
+    Shell32.lib \
+    Advapi32.lib \
+    Ole32.lib
 
 # Default
 all: prepare debug release clean
@@ -39,12 +35,12 @@ prepare:
 
 # Build console based executable for debugging/development
 debug: prepare objects resources
-	$(CC) $(CFLAGS) /Zi /Fe:debug\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(CONSOLE_APP)
+	$(CC) $(CFLAGS) /Zi /Fe:debug\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:CONSOLE
 	COPY lib\sdl\lib\$(ARCH)\SDL2.dll debug\SDL2.dll
 
 # Build gui based executable for distribution
 release: prepare objects resources
-	$(CC) $(CFLAGS) /Fe:release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(GUI_APP)
+	$(CC) $(CFLAGS) /Fe:release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:WINDOWS
 	COPY lib\sdl\lib\$(ARCH)\SDL2.dll release\SDL2.dll
 
 # Build object files (.obj)
@@ -56,8 +52,8 @@ resources: src/$(APPNAME).rc res/$(APPNAME).ico
 	RC src\$(APPNAME).rc
 	MOVE src\$(APPNAME).res $(APPNAME).res
 
-# Run application connected to a console 
-test: debug
+# Run console-based application
+test:
 	debug\$(APPNAME).exe
 
 # Remove leftover build artifacts
