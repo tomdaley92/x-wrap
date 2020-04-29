@@ -30,36 +30,46 @@ LIBS = SDL2.lib \
        Ole32.lib
 
 # Default target
-all: clean build_debug build_release
-	DEL *.exe *.obj *.res *.pdb
+all: prepare debug release clean
 
-build_debug: objects resource
-	$(CC) $(CFLAGS) /Zi /Fe$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(CONSOLE_APP)
-	MOVE $(APPNAME).exe debug/$(APPNAME).exe
+prepare:
+	@echo off
+	IF  not exist debug ( MKDIR debug )
+	IF  not exist release ( MKDIR release )
+
+debug: objects resource
+	@echo off
+	$(CC) $(CFLAGS) /Zi /Fe:debug\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(CONSOLE_APP)
 	COPY frameworks\sdl\lib\$(ARCH)\SDL2.dll debug\SDL2.dll
 
-build_release: objects resource
-	$(CC) $(CFLAGS) /Fe$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(GUI_APP)
-	MOVE $(APPNAME).exe release/$(APPNAME).exe
+release: objects resource
+	@echo off
+	$(CC) $(CFLAGS) /Fe:release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(GUI_APP)
 	COPY frameworks\sdl\lib\$(ARCH)\SDL2.dll release\SDL2.dll
 
-test_debug: 
-	debug\$(APPNAME).exe \
+run_debug: 
+	debug\$(APPNAME).exe
 
-test_release: 
-	release\$(APPNAME).exe \
+run_release: 
+	release\$(APPNAME).exe
 
 # Build object files
-objects: src/*.c* frameworks\imgui\imgui*.cpp
+objects: src/*.c* frameworks/imgui/imgui*.cpp
+	@echo off
 	$(CC) $(CFLAGS) /c $(INCS) $(CFLAGS) $?	
 
 # Build resource file
-resource: src\$(APPNAME).rc resources\$(APPNAME).ico
+resource: src/$(APPNAME).rc resources/$(APPNAME).ico
 	RC src\$(APPNAME).rc
 	MOVE src\$(APPNAME).res $(APPNAME).res
 
-# Deletes any leftover executables or object files
+# Remove leftover build artifacts
 clean:
-	DEL $(APPNAME).exe *.obj *.res *.pdb *.ini
-	cd debug & DEL $(APPNAME).exe *.dll *.ini
-	cd release & DEL $(APPNAME).exe *.dll *.ini
+	@echo off
+	IF exist *.obj (DEL *.obj)
+	IF exist *.res (DEL *.res)
+
+reset:
+	@echo off
+	IF  exist debug ( RD /S /Q debug )
+	IF  exist release ( RD /S /Q release )

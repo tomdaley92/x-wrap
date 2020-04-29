@@ -7,7 +7,7 @@
 #include "resource.h" /* window icon, trayicon menu */
 #include "tray.h" /* TRAYICON_ID, and tray functions */
 
-#define WINDOW_TITLE "Xwrap v0.0.1"
+#define WINDOW_TITLE "Xwrap (BETA)"
 
 #define WIDTH 800
 #define HEIGHT 800

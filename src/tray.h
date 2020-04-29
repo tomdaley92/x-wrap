@@ -6,7 +6,7 @@ typedef struct HWND__* HWND;
 typedef struct HICON__* HICON;
 typedef struct HMENU__* HMENU;
 
-#define TRAYICON_ID 13
+#define TRAYICON_ID 1
 #define TRAYICON_CALLBACKID WM_USER + 1
 
 void add_tray_icon(HWND hWnd, HICON hIcon, char *hover_tip);
