@@ -14,8 +14,7 @@ Specifically, you will want these tools added to `PATH`:
 - nmake
 
 
-1. Open `CMD` and load the 
-   development environment.
+1. Open `CMD` and set up your environment.
 
 ```cmd
 vcvarsall x86
