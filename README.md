@@ -6,15 +6,24 @@ keyboard+mouse mapping utility for
 Windows. A work in progress.
 
 ## Building on Windows
-[Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are assumed to be installed and accessible from the command line:
-- `vcvarsall`
-- `cl`
-- `nmake`
+[Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are assumed to be installed. 
 
-1) Open the command prompt and navigate 
-   to this directory.
+Specifically, you will want these tools added to `PATH`:
+- vcvarsall
+- cl
+- nmake
 
-2) Type `vcvarsall x86` to load the 
-   windows development environment.
+1. Open `cmd` and load the 
+   development environment.
+   
+```cmd
+vcvarsall x86
+```
 
-3) Type `nmake`.
+2. Build from source.
+
+```cmd
+nmake
+```
+
+3. You may 
