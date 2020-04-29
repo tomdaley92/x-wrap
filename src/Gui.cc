@@ -82,10 +82,10 @@ void Gui::leftPane() {
             ImGui::Checkbox("Minimize on exit", &(config->minimize_on_exit));
             if (before != config->minimize_on_exit) save_config(config);
             if (ImGui::IsItemHovered()) ImGui::SetTooltip(
-                "When enabled, the application will minimize to\n" 
-                "the system tray (instead of closing) when you\n" 
-                "click on the X. You may always right-click the\n" 
-                "tray icon in order to close the application at any time.");
+                "When enabled, the application will minimize to the system\n"
+                "tray (instead of closing) when you click on 'X'. You may \n"
+                "always right-click the tray icon and select 'Quit' to \n"
+                "close the application at any time.");
             
             ImGui::TreePop();
         }
