@@ -13,17 +13,25 @@ Specifically, you will want these tools added to `PATH`:
 - cl
 - nmake
 
-1. Open `cmd` and load the 
+1. Open `CMD` and load the 
    development environment.
-   
+
 ```cmd
 vcvarsall x86
 ```
 
-2. Build from source.
+2. Build from source using the `NMAKE` utility.
 
 ```cmd
 nmake
 ```
 
-3. You may 
+3. Other useful commands (see [makefile](/makefile)):
+
+```cmd
+nmake all
+```
+
+```cmd
+nmake
+```
