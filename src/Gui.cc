@@ -74,7 +74,7 @@ void Gui::leftPane() {
             ImGui::Checkbox("Start in system tray", &(config->start_in_tray));
             if (before != config->start_in_tray) save_config(config);
             if (ImGui::IsItemHovered()) ImGui::SetTooltip(
-                "If enabled, the application will start minimized in the\n"
+                "When enabled, the application will start minimized in the\n"
                 "system tray. You can left-click the tray icon to bring up\n"
                 "the window or right-click the tray icon for more options.");
 
@@ -82,10 +82,10 @@ void Gui::leftPane() {
             ImGui::Checkbox("Minimize on exit", &(config->minimize_on_exit));
             if (before != config->minimize_on_exit) save_config(config);
             if (ImGui::IsItemHovered()) ImGui::SetTooltip(
-                "If enabled, the application will minimize to\n" 
+                "When enabled, the application will minimize to\n" 
                 "the system tray (instead of closing) when you\n" 
-                "click on the X. You can always right-click the\n" 
-                "tray icon to close the application at any time.");
+                "click on the X. You may always right-click the\n" 
+                "tray icon in order to close the application at any time.");
             
             ImGui::TreePop();
         }
