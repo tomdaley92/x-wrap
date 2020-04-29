@@ -13,6 +13,7 @@ Specifically, you will want these tools added to `PATH`:
 - cl
 - nmake
 
+
 1. Open `CMD` and load the 
    development environment.
 
