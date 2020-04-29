@@ -6,7 +6,7 @@
 
 void init_config(XWRAP_CONFIG *config) {
     /* defaults */
-    config->boot_on_startup = 0;
+    config->start_on_login = 0;
     config->start_in_tray = 0;
     config->minimize_on_exit = 0;
 }
@@ -17,7 +17,7 @@ int load_config(XWRAP_CONFIG *config) {
     wchar_t filePath[MAX_PATH] = L"";
     init_config(config);
 
-    int boot_on_startup;
+    int start_on_login;
     int start_in_tray;
     int minimize_on_exit;
     
@@ -54,10 +54,10 @@ int load_config(XWRAP_CONFIG *config) {
     /* load values from the config file */
     int num_fields_extracted = fscanf_s( 
         file,
-        "boot_on_startup = %d\n"
+        "start_on_login = %d\n"
         "start_in_tray = %d\n"
         "minimize_on_exit = %d\n",
-        &boot_on_startup,
+        &start_on_login,
         &start_in_tray,
         &minimize_on_exit );
 
@@ -69,18 +69,18 @@ int load_config(XWRAP_CONFIG *config) {
     }
 
     /* set the config flags */
-    config->boot_on_startup = boot_on_startup != 0;
+    config->start_on_login = start_on_login != 0;
     config->start_in_tray = start_in_tray != 0;
     config->minimize_on_exit = minimize_on_exit != 0;
 
     /* print config to console */
     fprintf( stderr, 
         "Loaded config file %S\n"
-        "boot_on_startup = %d\n"
+        "start_on_login = %d\n"
         "start_in_tray = %d\n"
         "minimize_on_exit = %d\n",
         filePath,
-        config->boot_on_startup,
+        config->start_on_login,
         config->start_in_tray,
         config->minimize_on_exit );
 
@@ -93,11 +93,11 @@ int save_config(XWRAP_CONFIG *config) {
     int fileStatus;
     wchar_t filePath[MAX_PATH] = L"";
 
-    int boot_on_startup;
+    int start_on_login;
     int start_in_tray;
     int minimize_on_exit;
 
-    boot_on_startup = config->boot_on_startup ? 1 : 0;
+    start_on_login = config->start_on_login ? 1 : 0;
     start_in_tray = config->start_in_tray ? 1 : 0;
     minimize_on_exit = config->minimize_on_exit ? 1 : 0;
     
@@ -133,10 +133,10 @@ int save_config(XWRAP_CONFIG *config) {
 
     /* write default values to file */
     fprintf(file, 
-        "boot_on_startup = %d\n"
+        "start_on_login = %d\n"
         "start_in_tray = %d\n"
         "minimize_on_exit = %d\n",
-        boot_on_startup,
+        start_on_login,
         start_in_tray,
         minimize_on_exit );
 

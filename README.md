@@ -5,10 +5,8 @@ A simple and lightweight gamepad to
 keyboard+mouse mapping utility for 
 Windows. A work in progress.
 
-**GAMEPAD MAPPING IS NOT YET FUNCTIONAL!**
-
 ## Building on Windows
-Microsoft's Visual C++ Build Tools 
+[Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 (vcvarsall/cl/nmake) are assumed to be 
 installed and added to PATH.
 1) Open the command prompt and navigate 

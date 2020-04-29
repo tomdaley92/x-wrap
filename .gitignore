@@ -2,3 +2,5 @@
 *.res
 *.pdb
 *.ilk
+debug
+release

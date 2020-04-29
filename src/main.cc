@@ -44,8 +44,8 @@ int main(int argc, char **argv) {
         return 1;
 
     /* set the boot flag / update registry value */
-    display.setTrayMenuBootFlag(config.boot_on_startup);
-    config.boot_on_startup = registry_launch_on_startup(config.boot_on_startup);
+    display.setTrayMenuBootFlag(config.start_on_login);
+    config.start_on_login = registry_launch_on_startup(config.start_on_login);
 
     /* timing control variables */
     unsigned int t1;
@@ -138,10 +138,10 @@ int main(int argc, char **argv) {
                     /* close when the user clicks the tray menu quit button */
                     if (LOWORD(event.syswm.msg->msg.win.wParam == TRAYICON_QUIT)) 
                         done = 1; 
-                    /* toggle boot on startup (right-click tray icon menu) */
+                    /* toggle start on boot (right-click tray icon menu) */
                     if (LOWORD(event.syswm.msg->msg.win.wParam == TRAYICON_BOOT_FLAG)) {
-                        config.boot_on_startup = registry_launch_on_startup(!config.boot_on_startup);
-                        display.setTrayMenuBootFlag(config.boot_on_startup);
+                        config.start_on_login = registry_launch_on_startup(!config.start_on_login);
+                        display.setTrayMenuBootFlag(config.start_on_login);
                         save_config(&config);
                     }
                 }

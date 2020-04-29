@@ -4,7 +4,7 @@
 #define CONFIG_NUM_REQUIRED_FIELDS 3
 
 typedef struct XWRAP_CONFIG {
-    bool boot_on_startup;
+    bool start_on_login;
     bool start_in_tray;
     bool minimize_on_exit;
 } XWRAP_CONFIG;

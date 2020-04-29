@@ -1,6 +1,6 @@
 #include "resource.h"
 
-XWRAP_ICON    ICON    "resources/Xwrap.ico"
+XWRAP_ICON    ICON    "res/Xwrap.ico"
 
 SYSTEMTRAY_MENU MENU 
 BEGIN 

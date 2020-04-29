@@ -17,11 +17,11 @@ GUI_APP = /SUBSYSTEM:WINDOWS
 CC = CL
 CFLAGS = /MD /nologo /W3
 LFLAGS = /link \
-		 /LIBPATH:$(MAKEDIR)/frameworks/sdl/lib/$(ARCH) \
+		 /LIBPATH:$(MAKEDIR)/lib/sdl/lib/$(ARCH) \
 		 /ENTRY:mainCRTStartup
 
-INCS = /I$(MAKEDIR)/frameworks/sdl/include/ \
-	   /I$(MAKEDIR)/frameworks/imgui/
+INCS = /I$(MAKEDIR)/lib/sdl/include/ \
+	   /I$(MAKEDIR)/lib/imgui/
 LIBS = SDL2.lib \
 	   SDL2main.lib \
 	   opengl32.lib \
@@ -29,47 +29,43 @@ LIBS = SDL2.lib \
        Advapi32.lib \
        Ole32.lib
 
-# Default target
+# Default
 all: prepare debug release clean
 
+# Ensure necessary directories are built
 prepare:
-	@echo off
 	IF  not exist debug ( MKDIR debug )
 	IF  not exist release ( MKDIR release )
 
-debug: objects resource
-	@echo off
+# Build console based executable for debugging/development
+debug: prepare objects resources
 	$(CC) $(CFLAGS) /Zi /Fe:debug\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(CONSOLE_APP)
-	COPY frameworks\sdl\lib\$(ARCH)\SDL2.dll debug\SDL2.dll
+	COPY lib\sdl\lib\$(ARCH)\SDL2.dll debug\SDL2.dll
 
-release: objects resource
-	@echo off
+# Build gui based executable for distribution
+release: prepare objects resources
 	$(CC) $(CFLAGS) /Fe:release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) $(GUI_APP)
-	COPY frameworks\sdl\lib\$(ARCH)\SDL2.dll release\SDL2.dll
+	COPY lib\sdl\lib\$(ARCH)\SDL2.dll release\SDL2.dll
 
-run_debug: 
-	debug\$(APPNAME).exe
-
-run_release: 
-	release\$(APPNAME).exe
-
-# Build object files
-objects: src/*.c* frameworks/imgui/imgui*.cpp
-	@echo off
+# Build object files (.obj)
+objects: src/*.c* lib/imgui/imgui*.cpp
 	$(CC) $(CFLAGS) /c $(INCS) $(CFLAGS) $?	
 
-# Build resource file
-resource: src/$(APPNAME).rc resources/$(APPNAME).ico
+# Build resource files (.res)
+resources: src/$(APPNAME).rc res/$(APPNAME).ico
 	RC src\$(APPNAME).rc
 	MOVE src\$(APPNAME).res $(APPNAME).res
 
+# Run application connected to a console 
+test: debug
+	debug\$(APPNAME).exe
+
 # Remove leftover build artifacts
 clean:
-	@echo off
 	IF exist *.obj (DEL *.obj)
 	IF exist *.res (DEL *.res)
 
-reset:
-	@echo off
+# Remove all build artifacts and executables
+reset: clean
 	IF  exist debug ( RD /S /Q debug )
 	IF  exist release ( RD /S /Q release )
