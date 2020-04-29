@@ -26,12 +26,16 @@ vcvarsall x86
 nmake
 ```
 
-3. Other useful commands (see [makefile](/makefile)):
+3. Other useful build commands (see [makefile](/makefile)):
 
 ```cmd
-nmake all
+nmake test
 ```
 
 ```cmd
-nmake
+nmake clean
+```
+
+```cmd
+nmake reset
 ```
