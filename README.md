@@ -8,7 +8,11 @@ Windows. A work in progress.
 ## Building on Windows
 [Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 (vcvarsall/cl/nmake) are assumed to be 
-installed and added to PATH.
+installed and added to PATH:
+    - `vcvarsall`
+    - `cl`
+    - `nmake`
+
 1) Open the command prompt and navigate 
    to the Xwrap directory.
 2) Type `vcvarsall x86` to load the 
