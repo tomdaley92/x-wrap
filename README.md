@@ -12,28 +12,22 @@ Windows. A work in progress.
   - nmake
 
 
-1. Open `CMD` and set up your environment.
+Open `CMD` and set up your environment.
 
-```cmd
+```bat
 vcvarsall x86
 ```
 
-2. Build from source using the `NMAKE` utility.
+Build from source using the `NMAKE` utility.
 
-```cmd
+```bat
 nmake
 ```
 
-3. Other useful build commands (see [makefile](/makefile)):
+Other useful commands (see [makefile](/makefile)):
 
-```cmd
+```bat
 nmake test
-```
-
-```cmd
 nmake clean
-```
-
-```cmd
 nmake reset
 ```
