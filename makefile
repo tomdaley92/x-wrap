@@ -21,9 +21,9 @@ INCS = /I $(MAKEDIR)/lib/sdl/include/ \
 LIBS = SDL2.lib \
 	SDL2main.lib \
 	opengl32.lib \
-    Shell32.lib \
-    Advapi32.lib \
-    Ole32.lib
+	Shell32.lib \
+	Advapi32.lib \
+	Ole32.lib
 
 # Default
 all: prepare debug release clean
