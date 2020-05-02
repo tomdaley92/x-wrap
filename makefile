@@ -59,7 +59,7 @@ resources: src/$(APPNAME).rc res/$(APPNAME).ico
 run:
 	debug\$(APPNAME).exe
 
-# Remove leftover build artifacts 
+# Remove leftover build artifacts and executables
 clean:
 	IF exist *.obj (DEL *.obj)
 	IF exist *.res (DEL *.res)
