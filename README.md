@@ -29,5 +29,4 @@ Other useful commands (see [makefile](/makefile)):
 ```bat
 nmake run
 nmake clean
-nmake reset
 ```
