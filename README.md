@@ -27,7 +27,7 @@ nmake
 Other useful commands (see [makefile](/makefile)):
 
 ```bat
-nmake test
+nmake run
 nmake clean
 nmake reset
 ```
