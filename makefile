@@ -25,24 +25,19 @@ LIBS = SDL2.lib \
 	Advapi32.lib \
 	Ole32.lib
 
-# Default
-all:
-	NMAKE debug
-	NMAKE release
-
 # Build console based application for debugging/development
-debug: objects resources
-	IF  not exist debug ( MKDIR debug )
-	$(CC) $(CFLAGS) /Zi /Fe:debug\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:CONSOLE
-	COPY lib\sdl\lib\$(ARCH)\SDL2.dll debug\SDL2.dll
+develop: objects resources
+	IF  not exist bin\develop ( MKDIR bin\develop )
+	$(CC) $(CFLAGS) /Zi /Fe:bin\develop\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:CONSOLE
+	COPY lib\sdl\lib\$(ARCH)\SDL2.dll bin\develop\SDL2.dll
 	IF exist *.obj (DEL *.obj)
 	IF exist *.res (DEL *.res)
 
 # Build gui based application for distribution
 release: objects resources
-	IF  not exist release ( MKDIR release )
-	$(CC) $(CFLAGS) /Fe:release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:WINDOWS
-	COPY lib\sdl\lib\$(ARCH)\SDL2.dll release\SDL2.dll
+	IF  not exist bin\release ( MKDIR bin\release )
+	$(CC) $(CFLAGS) /Fe:bin\release\$(APPNAME) $(INCS) *.obj *.res $(LIBS) $(LFLAGS) /SUBSYSTEM:WINDOWS
+	COPY lib\sdl\lib\$(ARCH)\SDL2.dll bin\release\SDL2.dll
 	IF exist *.obj (DEL *.obj)
 	IF exist *.res (DEL *.res)
 
@@ -57,11 +52,10 @@ resources: src/$(APPNAME).rc res/$(APPNAME).ico
 
 # Run console-based application
 run:
-	debug\$(APPNAME).exe
+	bin\develop\$(APPNAME).exe
 
 # Remove leftover build artifacts and executables
 clean:
 	IF exist *.obj (DEL *.obj)
 	IF exist *.res (DEL *.res)
-	IF  exist debug ( RD /S /Q debug )
-	IF  exist release ( RD /S /Q release )
+	IF  exist bin ( RD /S /Q bin )

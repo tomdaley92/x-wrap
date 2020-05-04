@@ -2,5 +2,6 @@
 *.res
 *.pdb
 *.ilk
-debug
+bin
+develop
 release

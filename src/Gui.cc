@@ -1,6 +1,7 @@
 #include "Gui.h"
 #include "Display.h"
 #include "Gamepad.h"
+#include "registry.h"
 #include "focus.h" /* get_current_focus */
 #include "config.h"
 #include <stdio.h> /* sprintf */
@@ -69,9 +70,20 @@ void Gui::leftPane() {
         ImGui::TextWrapped("Xwrap beta - \"Gamepad to Keyboard/Mouse Mapper\"");
 
         if (ImGui::TreeNode("Preferences")) {
+
+            before = config->start_on_login;
+            ImGui::Checkbox("Start with Windows", &(config->start_on_login));
+            if (before != config->start_on_login) {
+                config->start_on_login = registry_launch_on_startup(config->start_on_login);
+                display->setTrayMenuBootFlag(config->start_on_login);
+                save_config(config);
+            } 
+            if (ImGui::IsItemHovered()) ImGui::SetTooltip(
+                "When enabled, the application will start when the current \n"
+                "user logs in.");
             
             before = config->start_in_tray;
-            ImGui::Checkbox("Start in system tray", &(config->start_in_tray));
+            ImGui::Checkbox("Start minimized", &(config->start_in_tray));
             if (before != config->start_in_tray) save_config(config);
             if (ImGui::IsItemHovered()) ImGui::SetTooltip(
                 "When enabled, the application will start minimized in the\n"

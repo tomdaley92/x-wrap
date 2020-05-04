@@ -1,9 +1,9 @@
 # Xwrap
 **v0.0.1**
 
-A simple and lightweight gamepad to 
-keyboard+mouse mapping utility for 
-Windows. A work in progress.
+A simple and lightweight tool to map
+Xinput to keyboard & mouse strokes 
+Windows.
 
 ## Building on Windows
 [Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are assumed to be installed. Specifically, you will want these tools added to `PATH`:
@@ -12,22 +12,26 @@ Windows. A work in progress.
   - nmake
 
 
-Open `CMD` and set up your environment.
+Open `cmd` and set up your environment.
 
 ```bat
 vcvarsall x86
 ```
 
-Build from source using the `NMAKE` utility.
+Build from source using the `nmake` utility. 
 
 ```bat
-nmake
+nmake develop
+```
+
+Run the application.
+```bat
+nmake run
 ```
 
 Other useful commands (see [makefile](/makefile)):
 
 ```bat
-nmake run
+nmake release
 nmake clean
 ```
-
