@@ -4,7 +4,7 @@
 A simple and lightweight tool to map
 Xinput to keyboard & mouse strokes.
 
-## Dependencies
+## Dependencies & Requirements
 - Windows 10
 - Xinput
 
