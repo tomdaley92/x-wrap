@@ -54,8 +54,9 @@ int main(int argc, char **argv) {
     unsigned int remaining;
     unsigned int interval = 1000 / display.mode.refresh_rate;
 
-    /// AST Testss...
+    ///////////////////////////////////////////////////////
     fprintf(stderr, "-----AST tests-----\n");
+
     AbstractSyntaxTree left1 = AbstractSyntaxTree(4);
     AbstractSyntaxTree right1 = AbstractSyntaxTree(5);
     AbstractSyntaxTree left2 = AbstractSyntaxTree(6);
@@ -72,10 +73,7 @@ int main(int argc, char **argv) {
 
     ast.display();
 
-    ///////////////////////////////////////////////////////
-    /* parser tests */
     fprintf(stderr, "-----Parser tests-----\n");
-    
 
     char test[MAX_PATH];
 
