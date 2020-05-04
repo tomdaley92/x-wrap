@@ -39,9 +39,11 @@ class Gui {
         Gui();
         ~Gui();
 
-        void initialize(Display *display, 
-                        Gamepad *gamepad, 
-                        XWRAP_CONFIG *config);
+        void initialize(
+            Display *display, 
+            Gamepad *gamepad, 
+            XWRAP_CONFIG *config
+        );
 
         void processEvents(SDL_Event *event);
         void newFrame();

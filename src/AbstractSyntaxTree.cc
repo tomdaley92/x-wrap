@@ -9,7 +9,11 @@ AbstractSyntaxTree::AbstractSyntaxTree(int value) {
     this->right = NULL;
 }
 
-AbstractSyntaxTree::AbstractSyntaxTree(int value, AbstractSyntaxTree *left, AbstractSyntaxTree *right) {
+AbstractSyntaxTree::AbstractSyntaxTree(
+    int value, 
+    AbstractSyntaxTree *left, 
+    AbstractSyntaxTree *right
+) {
     this->value = value;
     left? this->left = left : this->left = NULL;
     right? this->right = right : this->right = NULL;

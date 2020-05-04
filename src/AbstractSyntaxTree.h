@@ -14,7 +14,13 @@ class AbstractSyntaxTree {
         AbstractSyntaxTree *right;
 
         AbstractSyntaxTree(int value);
-        AbstractSyntaxTree(int value, AbstractSyntaxTree *left, AbstractSyntaxTree *right);
+
+        AbstractSyntaxTree(
+            int value, 
+            AbstractSyntaxTree *left, 
+            AbstractSyntaxTree *right
+        );
+        
         ~AbstractSyntaxTree();
 
         void printPreOrder();
