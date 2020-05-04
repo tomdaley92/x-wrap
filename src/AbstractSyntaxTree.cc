@@ -59,34 +59,32 @@ void AbstractSyntaxTree::printPostOrder() {
     fprintf(stdout, "\n");
 }
 
-void AbstractSyntaxTree::format(char *padding, char *formatted) {
+void AbstractSyntaxTree::format(char **padding, char **formatted) {
     // private helper - TODO
     // https://gist.github.com/tomdaley92/507c3a99c56b779144d9c79c0a3900be
     int size;
-    free(formatted);
-    formatted = NULL;
-
-    // this needs work....
+    free(*formatted);
+    *formatted = NULL;
     
-    // get the size of the digits
+    // get the size of the digits + '()' + '\0'
     size = (int) (floor(log10(abs(value))) + 1) + 3;
-    formatted = (char *) malloc(sizeof(char) * size);
-    sprintf_s(formatted, size, "(%d)", value);
+    fprintf(stdout, "%d\n", size);
+    *formatted = (char *) malloc(sizeof(char) * size);
+    sprintf_s(*formatted, size, "(%d)", value);
     
-
     //size = strlen(formatted) + strlen(padding) + 1;
     //formatted = (char *) realloc(sizeof(char) * size)
 }
 
 void AbstractSyntaxTree::toString(char *formatted) {
     // public toString() - TODO
-    format(NULL, formatted);
+    format(NULL, &formatted);
 }
 
 void AbstractSyntaxTree::display() {
     // TODO
-    //char *formatted = NULL;
-    //format(formatted);
-    //fprintf(stdout,"%s\n", formatted);
-    //free (formatted);
+    char *formatted = NULL;
+    format(NULL, &formatted);
+    fprintf(stdout,"%s\n", formatted);
+    free(formatted);
 }

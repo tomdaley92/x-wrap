@@ -6,7 +6,7 @@ class AbstractSyntaxTree {
         void preOrder(AbstractSyntaxTree *node);
         void inOrder(AbstractSyntaxTree *node);
         void postOrder(AbstractSyntaxTree *node);
-        void format(char *padding, char *formatted);
+        void format(char **padding, char **formatted);
 
     public:
         int value;
