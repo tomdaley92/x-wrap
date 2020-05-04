@@ -43,7 +43,7 @@ void Stack::push(char *data) {
 }
 
 char *Stack::pop() {
-    // TODO: return apointer to the top of the stack
+    // TODO: return a pointer to the top of the stack
     if (size <= 0) return NULL;
 
     char *top = stack[0];

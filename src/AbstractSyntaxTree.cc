@@ -61,6 +61,7 @@ void AbstractSyntaxTree::printPostOrder() {
 
 void AbstractSyntaxTree::format(char *padding, char *formatted) {
     // private helper - TODO
+    // https://gist.github.com/tomdaley92/507c3a99c56b779144d9c79c0a3900be
     int size;
     free(formatted);
     formatted = NULL;
