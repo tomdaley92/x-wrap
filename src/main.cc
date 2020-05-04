@@ -55,6 +55,7 @@ int main(int argc, char **argv) {
     unsigned int interval = 1000 / display.mode.refresh_rate;
 
     /// AST Testss...
+    fprintf(stderr, "-----AST tests-----\n");
     AbstractSyntaxTree left1 = AbstractSyntaxTree(4);
     AbstractSyntaxTree right1 = AbstractSyntaxTree(5);
     AbstractSyntaxTree left2 = AbstractSyntaxTree(6);
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
     AbstractSyntaxTree left = AbstractSyntaxTree(2, &left1, &right1);
     AbstractSyntaxTree right = AbstractSyntaxTree(3, &left2, &right2);
 
-    AbstractSyntaxTree ast = AbstractSyntaxTree(1, &left, &right);
+    AbstractSyntaxTree ast = AbstractSyntaxTree(123, &left, &right);
 
     ast.printPreOrder();
     ast.printInOrder();
