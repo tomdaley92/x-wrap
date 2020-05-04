@@ -2,15 +2,14 @@
 **v0.0.1**
 
 A simple and lightweight tool to map
-Xinput to keyboard & mouse strokes 
-Windows.
+Xinput to keyboard & mouse strokes.
 
-## Building on Windows
-[Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are assumed to be installed. Specifically, you will want these tools added to `PATH`:
-  - vcvarsall
-  - cl
-  - nmake
+## Dependencies
+- Windows 10
+- Xinput
 
+## Building Natively on Windows
+[Microsoft's C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are assumed to be installed. Specifically, you will want `vcvarsall`, `cl`, and `nmake` accessible from the command line.
 
 Open `cmd` and set up your environment.
 
