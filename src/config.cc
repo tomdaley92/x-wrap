@@ -47,7 +47,7 @@ int load_config(XWRAP_CONFIG *config) {
     /* attempt to open a config file */
     fileStatus = _wfopen_s(&file, filePath, L"r");
     if (fileStatus) {
-        fprintf(stderr, "Creating new config file.\n");
+        fprintf(stderr, "Creating new config.\n");
         return save_config(config);
     }
 
@@ -62,8 +62,8 @@ int load_config(XWRAP_CONFIG *config) {
         &minimize_on_exit );
 
     if (num_fields_extracted < CONFIG_NUM_REQUIRED_FIELDS) {
-        fprintf(stderr, "Config file is corrupt!\n"
-            "Creating new config file with default values.\n");
+        fprintf(stderr, "Config is corrupt!\n"
+            "Creating new config with default values.\n");
         fclose(file);
         return save_config(config);
     }
@@ -127,7 +127,7 @@ int save_config(XWRAP_CONFIG *config) {
     /* overwrite the current config file */
     fileStatus = _wfopen_s(&file, filePath, L"w");
     if (fileStatus) {
-        fprintf(stderr, "Failed to save config file!\n");
+        fprintf(stderr, "Failed to save config!\n");
         return 1;
     }
 
@@ -144,6 +144,6 @@ int save_config(XWRAP_CONFIG *config) {
     fflush(file);
     fclose(file);
     
-    fprintf(stderr, "Saved config file %S\n", filePath);
+    fprintf(stderr, "Saved config %S\n", filePath);
     return 0;
 }
